@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 const express = require('express')
 const Schema = mongoose.Schema
 const app = express()
+var cors = require('cors')
 const jsonParser = express.json()
-
+app.use(cors())
 const userScheme = new Schema(
   { name: String, age: Number },
   { versionKey: false }
