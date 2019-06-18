@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../action/AddTodoAction'
-const AddTodo = ({ dispatch }) => {
+const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState('')
   const handleSubmit = event => {
     event.preventDefault()
-    dispatch(addTodo(text))
+    addTodo(text)
+    setText('')
   }
   return (
     <div>
@@ -21,4 +22,7 @@ const AddTodo = ({ dispatch }) => {
     </div>
   )
 }
-export default connect()(AddTodo)
+export default connect(
+  null,
+  { addTodo }
+)(AddTodo)

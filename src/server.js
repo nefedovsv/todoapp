@@ -5,10 +5,7 @@ const app = express()
 var cors = require('cors')
 const jsonParser = express.json()
 app.use(cors())
-const userScheme = new Schema(
-  { name: String, age: Number },
-  { versionKey: false }
-)
+const userScheme = new Schema({ todoText: String }, { versionKey: false })
 const User = mongoose.model('User', userScheme)
 
 mongoose.connect(
@@ -40,9 +37,9 @@ app.get('/api/users/:id', function(req, res) {
 app.post('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
 
-  const userName = req.body.name
-  const userAge = req.body.age
-  const user = new User({ name: userName, age: userAge })
+  const userName = req.body.todoText
+
+  const user = new User({ todoText: userName })
 
   user.save(function(err) {
     if (err) return console.log(err)
@@ -61,9 +58,9 @@ app.delete('/api/users/:id', function(req, res) {
 app.put('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
   const id = req.body.id
-  const userName = req.body.name
-  const userAge = req.body.age
-  const newUser = { age: userAge, name: userName }
+  const userName = req.body.todoText
+
+  const newUser = { todoText: userName }
 
   User.findOneAndUpdate({ _id: id }, newUser, { new: true }, function(
     err,
