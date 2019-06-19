@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addTodo } from '../action/AddTodoAction'
+import { addTodo } from '../action/addTodoAction'
 const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState('')
   const handleSubmit = event => {

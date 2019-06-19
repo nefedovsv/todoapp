@@ -12,7 +12,7 @@ export const addTodo = text => {
         console.log(error) // можно ввести дополнительный обработчик ошибок, подобным образом
       })*/
       const data = await response.json()
-      dispatch({ type: todo.ADD_TODO, payload: [data] })
+      dispatch({ type: todo.ADD_TODO, payload: data })
     } catch (error) {
       dispatch({ type: todo.FAIL_TODO })
     }
