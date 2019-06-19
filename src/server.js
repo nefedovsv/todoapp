@@ -5,7 +5,10 @@ const app = express()
 var cors = require('cors')
 const jsonParser = express.json()
 app.use(cors())
-const userScheme = new Schema({ todoText: String }, { versionKey: false })
+const userScheme = new Schema(
+  { todoText: String, completed: Boolean },
+  { versionKey: false }
+)
 const User = mongoose.model('User', userScheme)
 
 mongoose.connect(
@@ -26,20 +29,20 @@ app.get('/api/users', function(req, res) {
   })
 })
 
-app.get('/api/users/:id', function(req, res) {
+/*app.get('/api/users/:id', function(req, res) {
   const id = req.params.id
   User.findOne({ _id: id }, function(err, user) {
     if (err) return console.log(err)
     res.send(user)
   })
-})
+})*/
 
 app.post('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
 
-  const userName = req.body.todoText
+  const text = req.body.todoText
 
-  const user = new User({ todoText: userName })
+  const user = new User({ todoText: text, completed: false })
 
   user.save(function(err) {
     if (err) return console.log(err)
@@ -58,11 +61,9 @@ app.delete('/api/users/:id', function(req, res) {
 app.put('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
   const id = req.body.id
-  const userName = req.body.todoText
-
-  const newUser = { todoText: userName }
-
-  User.findOneAndUpdate({ _id: id }, newUser, { new: true }, function(
+  const completedTodo = req.body.completed
+  const changeTodo = { completed: completedTodo }
+  User.findOneAndUpdate({ _id: id }, changeTodo, { new: true }, function(
     err,
     user
   ) {
@@ -70,6 +71,8 @@ app.put('/api/users', jsonParser, function(req, res) {
     res.send(user)
   })
 })
+
+// тоже только с mongodb
 /*
 mongodb and express
 const express = require('express')
