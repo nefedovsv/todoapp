@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { setFilter } from '../action/setFilter'
 import * as filters from '../constants/constants'
+import { Button } from 'antd'
+import '../App.css'
 const Filters = ({ setFilter }) => {
   const visibility = [
     filters.VISIBILITY_FILTERS.ALL,
@@ -10,15 +12,18 @@ const Filters = ({ setFilter }) => {
   ]
   return visibility.map((item, index) => {
     return (
-      <button
-        key={index}
-        onClick={e => {
-          let currentFilter = e.currentTarget.innerText
-          setFilter(currentFilter)
-        }}
-      >
-        {item}
-      </button>
+      <div className="App">
+        <Button
+          type="primary"
+          key={index}
+          onClick={e => {
+            let currentFilter = e.currentTarget.innerText
+            setFilter(currentFilter)
+          }}
+        >
+          {item}
+        </Button>
+      </div>
     )
   })
 }
