@@ -2,7 +2,7 @@ import * as todo from '../constants/constants'
 export const toggleTodo = id => {
   return async dispatch => {
     try {
-      await fetch('http://localhost:3000/api/users/', {
+      await fetch(todo.API, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json',
@@ -12,7 +12,7 @@ export const toggleTodo = id => {
           completed: true,
         }),
       })
-      const response = await fetch('http://localhost:3000/api/users/')
+      const response = await fetch(todo.API)
       const data = await response.json()
       dispatch({ type: todo.TOGGLE_TODO, payload: data })
     } catch (error) {

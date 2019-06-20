@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAllTodo } from '../action/getAllTodo'
+import { Todo } from '../components/Todo'
 import { deliteTodo } from '../action/deliteTodo'
 import { toggleTodo } from '../action/toggleTodo'
+import { getArrayTodosByVisibilityFilter } from '../reducers/selectors'
 class TodoList extends Component {
   componentDidMount() {
     this.props.getAllTodo()
@@ -16,24 +18,19 @@ class TodoList extends Component {
   render() {
     const { arrayTodo } = this.props
     return (
-      <div>
-        {arrayTodo.map(todo => (
-          <div key={todo._id}>
-            {todo && todo.completed ? 'СДЕЛАНО ' : ''}
-            <span onClick={this.handleClickText(todo)}>
-              {todo.todoText}
-            </span>{' '}
-            <button onClick={this.handleClick(todo)}> Удалить </button>
-          </div>
-        ))}
-      </div>
+      <Todo
+        arrayTodo={arrayTodo}
+        handleClick={this.handleClick}
+        handleClickText={this.handleClickText}
+      />
     )
   }
 }
 const mapStateToProps = store => {
-  return {
-    arrayTodo: store.todos,
-  }
+  const { visibilityFilter } = store
+  const { todos } = store
+  const arrayTodo = getArrayTodosByVisibilityFilter(todos, visibilityFilter)
+  return { arrayTodo }
 }
 const mapDispatchToProps = dispatch => {
   return {

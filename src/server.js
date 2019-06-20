@@ -29,6 +29,27 @@ app.get('/api/users', function(req, res) {
   })
 })
 
+app.get('/api/filters/all', function(req, res) {
+  User.find({}, function(err, users) {
+    if (err) return console.log(err)
+    res.send(users)
+  })
+})
+
+app.get('/api/filters/completed', function(req, res) {
+  User.find({ completed: true }, function(err, users) {
+    if (err) return console.log(err)
+    res.send(users)
+  })
+})
+
+app.get('/api/filters/uncompleted', function(req, res) {
+  User.find({ completed: false }, function(err, users) {
+    if (err) return console.log(err)
+    res.send(users)
+  })
+})
+
 /*app.get('/api/users/:id', function(req, res) {
   const id = req.params.id
   User.findOne({ _id: id }, function(err, user) {
@@ -39,11 +60,8 @@ app.get('/api/users', function(req, res) {
 
 app.post('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
-
-  const text = req.body.todoText
-
-  const user = new User({ todoText: text, completed: false })
-
+  const { todoText } = req.body
+  const user = new User({ todoText: todoText, completed: false })
   user.save(function(err) {
     if (err) return console.log(err)
     res.send(user)
@@ -60,9 +78,9 @@ app.delete('/api/users/:id', function(req, res) {
 
 app.put('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
-  const id = req.body.id
-  const completedTodo = req.body.completed
-  const changeTodo = { completed: completedTodo }
+  const { id } = req.body
+  const { completed } = req.body
+  const changeTodo = { completed: completed }
   User.findOneAndUpdate({ _id: id }, changeTodo, { new: true }, function(
     err,
     user
