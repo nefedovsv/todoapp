@@ -6,9 +6,15 @@ export const getAllTodo = (state = [], action) => {
     case todo.ADD_TODO:
       return [...state, action.payload]
     case todo.DELITE_TODO:
-      return [...action.payload]
+      const resultDelite = state.filter(item => item._id !== action.payload.id)
+      return [...resultDelite]
     case todo.TOGGLE_TODO:
-      return [...action.payload]
+      const resultToggle = state.map(item =>
+        item._id === action.payload.id
+          ? { ...item, completed: !action.payload.completed }
+          : item
+      )
+      return [...resultToggle]
     case todo.FAIL_TODO:
       return [...state, { fail: 'У вас ошибка!' }]
     default:

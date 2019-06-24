@@ -1,13 +1,13 @@
 import React from 'react'
-export const Form = props => {
+export const Form = ({ handleSubmit, setText, text }) => {
   return (
     <div>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={props.text}
+          value={text}
           placeholder="Todo text"
-          onChange={e => props.setText(e.currentTarget.value)}
+          onChange={e => setText(e.currentTarget.value)}
         />
         <input type="submit" value="Добавить" />
       </form>

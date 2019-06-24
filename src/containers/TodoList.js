@@ -13,7 +13,7 @@ class TodoList extends Component {
     this.props.deliteTodo(todo._id)
   }
   handleClickText = todo => () => {
-    this.props.toggleTodo(todo._id)
+    this.props.toggleTodo(todo._id, todo.completed)
   }
   render() {
     const { arrayTodo } = this.props
@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllTodo: () => dispatch(getAllTodo()),
     deliteTodo: id => dispatch(deliteTodo(id)),
-    toggleTodo: id => dispatch(toggleTodo(id)),
+    toggleTodo: (id, completed) => dispatch(toggleTodo(id, completed)),
   }
 }
 export default connect(

@@ -1,14 +1,12 @@
 import React from 'react'
-export const Todo = props => {
+export const Todo = ({ arrayTodo, handleClickText, handleClick }) => {
   return (
     <div>
-      {props.arrayTodo.map(todo => (
+      {arrayTodo.map(todo => (
         <div key={todo._id}>
           {todo && todo.completed ? 'СДЕЛАНО ' : ' '}
-          <span onClick={props.handleClickText(todo)}>
-            {todo.todoText}
-          </span>{' '}
-          <button onClick={props.handleClick(todo)}> Удалить </button>
+          <span onClick={handleClickText(todo)}>{todo.todoText}</span>{' '}
+          <button onClick={handleClick(todo)}> Удалить </button>
         </div>
       ))}
     </div>

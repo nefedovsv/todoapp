@@ -12,10 +12,9 @@ const Filters = ({ setFilter }) => {
   ]
   return visibility.map((item, index) => {
     return (
-      <div className="App">
+      <div className="App" key={index}>
         <Button
           type="primary"
-          key={index}
           onClick={e => {
             let currentFilter = e.currentTarget.innerText
             setFilter(currentFilter)

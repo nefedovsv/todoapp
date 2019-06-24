@@ -1,5 +1,5 @@
 import * as todo from '../constants/constants'
-export const toggleTodo = id => {
+export const toggleTodo = (id, completed) => {
   return async dispatch => {
     try {
       await fetch(todo.API, {
@@ -9,12 +9,10 @@ export const toggleTodo = id => {
         },
         body: JSON.stringify({
           id: id,
-          completed: true,
+          completed: !completed,
         }),
       })
-      const response = await fetch(todo.API)
-      const data = await response.json()
-      dispatch({ type: todo.TOGGLE_TODO, payload: data })
+      dispatch({ type: todo.TOGGLE_TODO, payload: { id, completed } })
     } catch (error) {
       dispatch({ type: todo.FAIL_TODO })
     }

@@ -5,9 +5,7 @@ export const deliteTodo = id => {
       await fetch(todo.API + `${id}`, {
         method: 'DELETE',
       })
-      const response = await fetch(todo.API)
-      const data = await response.json()
-      dispatch({ type: todo.DELITE_TODO, payload: data })
+      dispatch({ type: todo.DELITE_TODO, payload: { id } })
     } catch (error) {
       dispatch({ type: todo.FAIL_TODO })
     }
