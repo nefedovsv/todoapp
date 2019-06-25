@@ -2,7 +2,7 @@ import React from 'react'
 import AddTodo from './containers/AddTodo'
 import TodoList from './containers/TodoList'
 import Filters from './components/Filters'
-function App() {
+export function App() {
   return (
     <div>
       <AddTodo />
@@ -11,4 +11,3 @@ function App() {
     </div>
   )
 }
-export default App
