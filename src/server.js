@@ -16,7 +16,7 @@ mongoose.connect(
   { useNewUrlParser: true },
   function(err) {
     if (err) return console.log(err)
-    app.listen(3000, function() {
+    app.listen(3001, function() {
       console.log('Сервер ожидает подключения...')
     })
   }
