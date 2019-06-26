@@ -2,13 +2,16 @@ class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl
   }
-  async post(url, text) {
+  async post(url, userData) {
     const response = await fetch(this.baseUrl + url, {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ todoText: text }),
+      body: JSON.stringify({
+        todoText: userData.todoText,
+        userId: userData.userId,
+      }),
     })
     return response.json()
   }

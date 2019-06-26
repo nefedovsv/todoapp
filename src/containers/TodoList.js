@@ -15,7 +15,9 @@ class TodoList extends Component {
   handleClickText = todo => () => {
     this.props.toggleTodo(todo._id, todo.completed)
   }
+
   render() {
+    console.log(this.props.user.email)
     const { arrayTodo } = this.props
     return (
       <Todo

@@ -6,7 +6,7 @@ var cors = require('cors')
 const jsonParser = express.json()
 app.use(cors())
 const userScheme = new Schema(
-  { todoText: String, completed: Boolean },
+  { todoText: String, userId: String, completed: Boolean },
   { versionKey: false }
 )
 const User = mongoose.model('User', userScheme)
@@ -39,8 +39,12 @@ app.get('/api/users', function(req, res) {
 
 app.post('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
-  const { todoText } = req.body
-  const user = new User({ todoText: todoText, completed: false })
+  const { todoText, userId } = req.body
+  const user = new User({
+    todoText: todoText,
+    userId: userId,
+    completed: false,
+  })
   user.save(function(err) {
     if (err) return console.log(err)
     res.send(user)
