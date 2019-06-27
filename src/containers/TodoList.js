@@ -9,18 +9,19 @@ class TodoList extends Component {
   componentDidMount() {
     this.props.getAllTodo()
   }
-  handleClick = todo => () => {
-    this.props.deliteTodo(todo._id)
+  handleClick = (todo, getTokenSilently) => () => {
+    this.props.deliteTodo(todo._id, getTokenSilently)
   }
-  handleClickText = todo => () => {
-    this.props.toggleTodo(todo._id, todo.completed)
+  handleClickText = (todo, getTokenSilently) => () => {
+    this.props.toggleTodo(todo._id, todo.completed, getTokenSilently)
   }
 
   render() {
-    console.log(this.props.user.email)
     const { arrayTodo } = this.props
+    const { getTokenSilently } = this.props
     return (
       <Todo
+        getTokenSilently={getTokenSilently}
         arrayTodo={arrayTodo}
         handleClick={this.handleClick}
         handleClickText={this.handleClickText}
@@ -37,8 +38,9 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllTodo: () => dispatch(getAllTodo()),
-    deliteTodo: id => dispatch(deliteTodo(id)),
-    toggleTodo: (id, completed) => dispatch(toggleTodo(id, completed)),
+    deliteTodo: (id, token) => dispatch(deliteTodo(id, token)),
+    toggleTodo: (id, completed, token) =>
+      dispatch(toggleTodo(id, completed, token)),
   }
 }
 export default connect(

@@ -4,16 +4,17 @@ import { useAuth0 } from '../react-auth0-wrapper'
 import AddTodo from '../containers/AddTodo'
 import TodoList from '../containers/TodoList'
 import Filters from './Filters'
-const Profile = () => {
-  const { loading, user } = useAuth0()
+
+const Profile = props => {
+  const { loading, user, getTokenSilently } = useAuth0()
   if (loading || !user) {
     return 'Loading...'
   }
-
+  console.log(props)
   return (
     <>
-      <AddTodo user={user} />
-      <TodoList user={user} />
+      <AddTodo user={user} getTokenSilently={getTokenSilently} />
+      <TodoList user={user} getTokenSilently={getTokenSilently} />
       <Filters />
     </>
   )

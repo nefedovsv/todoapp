@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../action/addTodoAction'
 import { Form } from '../components/Form'
-const AddTodo = ({ addTodo, user }) => {
+const AddTodo = ({ addTodo, user, getTokenSilently }) => {
   const [text, setText] = useState('')
   const userData = {
     todoText: text,
@@ -10,7 +10,7 @@ const AddTodo = ({ addTodo, user }) => {
   }
   const handleSubmit = event => {
     event.preventDefault()
-    addTodo(userData)
+    addTodo(userData, getTokenSilently)
     setText('')
   }
   return <Form text={text} setText={setText} handleSubmit={handleSubmit} />
