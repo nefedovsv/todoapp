@@ -2,12 +2,11 @@ class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl
   }
-  async post(url, userData, token) {
+  async post(url, userData) {
     const response = await fetch(this.baseUrl + url, {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         todoText: userData.todoText,
@@ -16,24 +15,20 @@ class Api {
     })
     return response.json()
   }
-  async delite(url, id, token) {
+  async delite(url, id) {
     await fetch(this.baseUrl + url + `${id}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
     })
   }
   async get(url) {
     const response = await fetch(this.baseUrl + url)
     return response.json()
   }
-  async put(url, id, token, completed) {
+  async put(url, id, completed) {
     await fetch(this.baseUrl + url, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         id: id,

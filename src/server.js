@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 const express = require('express')
-const jwt = require('express-jwt')
-const jwksRsa = require('jwks-rsa')
 const Schema = mongoose.Schema
 const app = express()
 var cors = require('cors')
@@ -24,22 +22,6 @@ mongoose.connect(
     })
   }
 )
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: 'https://sergeynefedov.eu.auth0.com/.well-known/jwks.json',
-  }),
-  audience: 'http://localhost:3001/api/',
-  issuer: 'https://sergeynefedov.eu.auth0.com/',
-  algorithm: ['RS256'],
-})
-app.get('/api/external', checkJwt, (req, res) => {
-  res.send({
-    msg: 'Your Access Token was successfully validated!',
-  })
-})
 
 app.get('/api/users', function(req, res) {
   User.find({}, function(err, users) {
@@ -56,7 +38,7 @@ app.get('/api/users', function(req, res) {
   })
 })*/
 
-app.post('/api/users', checkJwt, jsonParser, function(req, res) {
+app.post('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
   const { todoText, userId } = req.body
   const user = new User({
@@ -70,7 +52,7 @@ app.post('/api/users', checkJwt, jsonParser, function(req, res) {
   })
 })
 
-app.delete('/api/users/:id', checkJwt, function(req, res) {
+app.delete('/api/users/:id', function(req, res) {
   const id = req.params.id
   User.findByIdAndDelete(id, function(err, user) {
     if (err) return console.log(err)
@@ -78,7 +60,7 @@ app.delete('/api/users/:id', checkJwt, function(req, res) {
   })
 })
 
-app.put('/api/users', checkJwt, jsonParser, function(req, res) {
+app.put('/api/users', jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
   const { id } = req.body
   const { completed } = req.body
