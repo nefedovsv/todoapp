@@ -1,13 +1,24 @@
 import React from 'react'
-import AddTodo from './containers/AddTodo'
-import TodoList from './containers/TodoList'
-import Filters from './components/Filters'
+import { Router, Route } from 'react-router'
+import { createBrowserHistory } from 'history'
+import { Switch } from 'react-router-dom'
+import { NoMatch } from './components/NoMatch'
+import Authorisation from './containers/Authorisation'
+import PrivateRoute from './containers/PrivateRoute'
+import AuthButton from './containers/AuthButton'
+import { TodoApp } from './components/TodoApp'
+const history = createBrowserHistory()
 export function App() {
   return (
-    <div>
-      <AddTodo />
-      <TodoList />
-      <Filters />
-    </div>
+    <Router history={history}>
+      <div>
+        <AuthButton />
+        <Switch>
+          <Route path="/login" component={Authorisation} />
+          <PrivateRoute path="/profile" component={TodoApp} />
+          <Route component={NoMatch} />
+        </Switch>
+      </div>
+    </Router>
   )
 }

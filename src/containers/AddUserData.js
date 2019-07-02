@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addTodo } from '../action/todo'
+import { handleLogIn } from '../action/authenticate'
 import { Form } from '../components/Form'
-const AddTodo = ({ addTodo }) => {
+const AddUserData = ({ handleLogIn }) => {
   const [text, setText] = useState('')
-  const userData = {
-    todoText: text,
-  }
+
   const handleSubmit = event => {
     event.preventDefault()
-    addTodo(userData)
+    handleLogIn(text)
     setText('')
   }
   return <Form text={text} setText={setText} handleSubmit={handleSubmit} />
 }
 export default connect(
   null,
-  { addTodo }
-)(AddTodo)
+  { handleLogIn }
+)(AddUserData)

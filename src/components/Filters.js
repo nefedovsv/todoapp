@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setFilter } from '../action/setFilter'
+import { setFilter } from '../action/todo'
 import * as filters from '../constants/constants'
 import { Button } from 'antd'
 import '../App.css'

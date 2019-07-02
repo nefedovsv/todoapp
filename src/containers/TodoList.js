@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getAllTodo } from '../action/getAllTodo'
+import { getAllTodo } from '../action/todo'
 import { Todo } from '../components/Todo'
-import { deliteTodo } from '../action/deliteTodo'
-import { toggleTodo } from '../action/toggleTodo'
+import { deliteTodo } from '../action/todo'
+import { toggleTodo } from '../action/todo'
 import { getArrayTodosByVisibilityFilter } from '../reducers/selectors'
 class TodoList extends Component {
   componentDidMount() {
