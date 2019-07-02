@@ -11,6 +11,7 @@ const AuthButton = withRouter(({ history, isAuthenticated, handleLogOut }) => {
         onClick={() => {
           handleLogOut()
           history.push('/login')
+          localStorage.clear()
         }}
       >
         Выйти
@@ -26,7 +27,6 @@ const mapStateToProps = store => {
     isAuthenticated: store.authentication.isAuthenticated,
   }
 }
-
 export default connect(
   mapStateToProps,
   { handleLogOut }

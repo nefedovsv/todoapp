@@ -4,10 +4,14 @@ const Schema = mongoose.Schema
 const app = express()
 var cors = require('cors')
 const jsonParser = express.json()
+const jwt = require('jsonwebtoken')
+const exjwt = require('express-jwt')
 app.use(cors())
-
+const jwtMW = exjwt({
+  secret: 'my Todo App',
+})
 const userScheme = new Schema(
-  { todoText: String, userId: String, completed: Boolean },
+  { data: String, userId: String, completed: Boolean, userName: String },
   { versionKey: false }
 )
 const User = mongoose.model('User', userScheme)
@@ -23,36 +27,42 @@ mongoose.connect(
   }
 )
 
-app.get('/api/users', function(req, res) {
-  User.find({}, function(err, users) {
+app.get('/api/users', jwtMW, function(req, res) {
+  User.find({ userName: req.user.userName }, function(err, users) {
     if (err) return console.log(err)
     res.send(users)
   })
 })
 
-/*app.get('/api/users/:id', function(req, res) {
-  const id = req.params.id
-  User.findOne({ _id: id }, function(err, user) {
-    if (err) return console.log(err)
-    res.send(user)
-  })
-})*/
-
-app.post('/api/users', jsonParser, function(req, res) {
+app.post('/api/users', jwtMW, jsonParser, function(req, res) {
+  console.log(req.user)
   if (!req.body) return res.sendStatus(400)
-  const { todoText, userId } = req.body
+  const { data } = req.body
   const user = new User({
-    todoText: todoText,
-    userId: userId,
+    data: data,
     completed: false,
+    userName: req.user.userName,
   })
+
   user.save(function(err) {
     if (err) return console.log(err)
     res.send(user)
   })
 })
 
-app.delete('/api/users/:id', function(req, res) {
+app.post('/api/token', jsonParser, function(req, res) {
+  if (!req.body) return res.sendStatus(400)
+  const { data } = req.body
+
+  let token = jwt.sign({ userName: data }, 'my Todo App', {
+    expiresIn: 129600,
+  })
+  res.json({
+    token,
+  })
+})
+
+app.delete('/api/users/:id', jwtMW, function(req, res) {
   const id = req.params.id
   User.findByIdAndDelete(id, function(err, user) {
     if (err) return console.log(err)
@@ -60,7 +70,7 @@ app.delete('/api/users/:id', function(req, res) {
   })
 })
 
-app.put('/api/users', jsonParser, function(req, res) {
+app.put('/api/users', jwtMW, jsonParser, function(req, res) {
   if (!req.body) return res.sendStatus(400)
   const { id } = req.body
   const { completed } = req.body
@@ -72,4 +82,12 @@ app.put('/api/users', jsonParser, function(req, res) {
     if (err) return console.log(err)
     res.send(user)
   })
+})
+
+app.use(function(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('err')
+  } else {
+    next(err)
+  }
 })

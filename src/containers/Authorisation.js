@@ -10,12 +10,18 @@ class Login extends Component {
     // this.props.getLog(username, password)
   }
   render() {
-    let { from } = this.props.location.state || { from: { pathname: '/' } }
+    let { from } = this.props.location.state || {
+      from: { pathname: '/profile' },
+    }
     if (this.props.isAuthenticated) return <Redirect to={from} />
     return <AddUserData />
   }
 }
 const mapStateToProps = store => {
+  localStorage.setItem(
+    'isAuthenticated',
+    `${store.authentication.isAuthenticated}`
+  )
   //console.log(store.authentication.isAuthenticated)
   return {
     isAuthenticated: store.authentication.isAuthenticated,

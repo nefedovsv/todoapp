@@ -5,7 +5,7 @@ export const Todo = ({ arrayTodo, handleClickText, handleClick }) => {
       {arrayTodo.map(todo => (
         <div key={todo._id}>
           {todo && todo.completed ? 'СДЕЛАНО ' : ' '}
-          <span onClick={handleClickText(todo)}>{todo.todoText}</span>{' '}
+          <span onClick={handleClickText(todo)}>{todo.data}</span>{' '}
           <button onClick={handleClick(todo)}> Удалить </button>
         </div>
       ))}

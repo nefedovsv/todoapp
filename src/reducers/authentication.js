@@ -1,7 +1,7 @@
 import * as login from '../constants/constants'
 const initialState = {
   isAuthenticated: false,
-  userData: '',
+  token: '',
 }
 export function authentication(state = initialState, action) {
   switch (action.type) {
@@ -9,7 +9,7 @@ export function authentication(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: action.payload,
-        userData: action.userData,
+        token: action.token,
       }
     case login.LOGOUT_ACTION:
       return {

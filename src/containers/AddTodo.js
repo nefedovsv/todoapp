@@ -4,12 +4,9 @@ import { addTodo } from '../action/todo'
 import { Form } from '../components/Form'
 const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState('')
-  const userData = {
-    todoText: text,
-  }
   const handleSubmit = event => {
     event.preventDefault()
-    addTodo(userData)
+    addTodo(text)
     setText('')
   }
   return <Form text={text} setText={setText} handleSubmit={handleSubmit} />

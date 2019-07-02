@@ -1,12 +1,18 @@
 import * as login from '../constants/constants'
-
-export function handleLogIn(text) {
-  return function(dispatch) {
-    dispatch({
-      type: login.LOGIN_ACTION,
-      payload: true,
-      userData: text,
-    })
+import { api } from '../constants/api'
+export const handleLogIn = data => {
+  return async dispatch => {
+    try {
+      const { token } = await api.post('token/', data)
+      localStorage.setItem('token', `${token}`)
+      dispatch({
+        type: login.LOGIN_ACTION,
+        payload: true,
+        token: token,
+      })
+    } catch (error) {
+      dispatch({ type: login.FAIL_TODO })
+    }
   }
 }
 

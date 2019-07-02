@@ -54,6 +54,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "express-jwt": "^5.3.1",
     "husky": "^2.3.0",
+    "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1",
     "lint-staged": "^8.1.7",
     "nodemon": "^1.19.1",
