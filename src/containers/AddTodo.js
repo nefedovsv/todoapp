@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../action/todo'
-import { Form } from '../components/Form'
+import { InputTodo } from '../components/InputTodo'
 const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState('')
   const handleSubmit = event => {
@@ -9,7 +9,7 @@ const AddTodo = ({ addTodo }) => {
     addTodo(text)
     setText('')
   }
-  return <Form text={text} setText={setText} handleSubmit={handleSubmit} />
+  return <InputTodo text={text} setText={setText} handleSubmit={handleSubmit} />
 }
 export default connect(
   null,

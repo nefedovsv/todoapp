@@ -1,8 +1,8 @@
 import * as todo from '../constants/constants'
-export const getAllTodo = (state = [], action) => {
+export const todoModification = (state = [], action) => {
   switch (action.type) {
     case todo.GET_ALL_TODO:
-      return [...state, ...action.payload]
+      return [...action.payload]
     case todo.ADD_TODO:
       return [...state, action.payload]
     case todo.DELITE_TODO:

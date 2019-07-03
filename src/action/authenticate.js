@@ -8,14 +8,12 @@ export const handleLogIn = data => {
       dispatch({
         type: login.LOGIN_ACTION,
         payload: true,
-        token: token,
       })
     } catch (error) {
       dispatch({ type: login.FAIL_TODO })
     }
   }
 }
-
 export function handleLogOut() {
   return function(dispatch) {
     dispatch({

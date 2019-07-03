@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAllTodo } from '../action/todo'
-import { Todo } from '../components/Todo'
 import { deliteTodo } from '../action/todo'
 import { toggleTodo } from '../action/todo'
+import { Todo } from '../components/Todo'
 import { getArrayTodosByVisibilityFilter } from '../reducers/selectors'
 class TodoList extends Component {
   componentDidMount() {
@@ -15,10 +15,8 @@ class TodoList extends Component {
   handleClickText = todo => () => {
     this.props.toggleTodo(todo._id, todo.completed)
   }
-
   render() {
     const { arrayTodo } = this.props
-
     return (
       <Todo
         arrayTodo={arrayTodo}

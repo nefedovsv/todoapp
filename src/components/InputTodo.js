@@ -1,5 +1,5 @@
 import React from 'react'
-export const Form = ({ handleSubmit, setText, text }) => {
+export const InputTodo = ({ handleSubmit, setText, text }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>

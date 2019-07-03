@@ -2,6 +2,6 @@
 
 import React from 'react'
 
-export const NoMatch = () => {
+export const NoMatchPage = () => {
   return <p>ошибка в роутинге</p>
 }

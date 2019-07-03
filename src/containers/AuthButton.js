@@ -21,7 +21,6 @@ const AuthButton = withRouter(({ history, isAuthenticated, handleLogOut }) => {
     <p>Вы не авторизованны!</p>
   )
 })
-
 const mapStateToProps = store => {
   return {
     isAuthenticated: store.authentication.isAuthenticated,

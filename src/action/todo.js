@@ -20,7 +20,6 @@ export const deliteTodo = id => {
     }
   }
 }
-
 export const getAllTodo = () => {
   return async dispatch => {
     try {
@@ -31,7 +30,6 @@ export const getAllTodo = () => {
     }
   }
 }
-
 export const toggleTodo = (id, completed) => {
   return async dispatch => {
     try {
@@ -42,7 +40,6 @@ export const toggleTodo = (id, completed) => {
     }
   }
 }
-
 export const setFilter = filter => ({
   type: todo.SET_FILTER,
   payload: { filter },

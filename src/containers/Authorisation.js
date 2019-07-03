@@ -5,10 +5,6 @@ import { handleLogIn } from '../action/authenticate'
 import AddUserData from '../containers/AddUserData'
 
 class Login extends Component {
-  handleloginAction = () => {
-    console.log(this.props)
-    // this.props.getLog(username, password)
-  }
   render() {
     let { from } = this.props.location.state || {
       from: { pathname: '/profile' },
@@ -18,11 +14,6 @@ class Login extends Component {
   }
 }
 const mapStateToProps = store => {
-  localStorage.setItem(
-    'isAuthenticated',
-    `${store.authentication.isAuthenticated}`
-  )
-  //console.log(store.authentication.isAuthenticated)
   return {
     isAuthenticated: store.authentication.isAuthenticated,
   }
