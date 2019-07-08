@@ -6,8 +6,7 @@ import { NoMatchPage } from './components/NoMatchPage'
 import { TodoPage } from './components/TodoPage'
 import Login from './containers/Authorisation'
 import PrivateRoute from './containers/PrivateRoute'
-import AuthButton from './containers/AuthButton'
-
+import AuthButton from './containers/Header/AuthButton'
 const history = createBrowserHistory()
 export function App() {
   return (

@@ -1,13 +1,17 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handleLogOut } from '../action/authenticate'
-
+import { Typography, Button } from 'antd'
+import { handleLogOut } from '../../action/authenticate'
+//import c from 'classnames'
+import styles from './AuthButton.module.css'
+const { Text } = Typography
 const AuthButton = withRouter(({ history, isAuthenticated, handleLogOut }) => {
   return isAuthenticated ? (
-    <p>
-      Добро пожаловать!
-      <button
+    <Text strong className={styles.root}>
+      <span className={styles.margin}>Добро пожаловать!</span>
+      <Button
+        type="primary"
         onClick={() => {
           handleLogOut()
           history.push('/login')
@@ -15,10 +19,12 @@ const AuthButton = withRouter(({ history, isAuthenticated, handleLogOut }) => {
         }}
       >
         Выйти
-      </button>
-    </p>
+      </Button>
+    </Text>
   ) : (
-    <p>Вы не авторизованны!</p>
+    <Text strong className={styles.root}>
+      Вы не авторизованны!
+    </Text>
   )
 })
 const mapStateToProps = store => {

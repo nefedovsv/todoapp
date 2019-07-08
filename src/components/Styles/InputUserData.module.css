@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+  height: 550px;
+  background-image: url(note.jpg);
+  background-size: cover;
+  background-repeat: repeat-y;
+}

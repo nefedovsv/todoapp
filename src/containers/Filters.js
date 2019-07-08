@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { setFilter } from '../action/todo'
 import * as filters from '../constants/constants'
 import { Button } from 'antd'
-import '../App.css'
 const Filters = ({ setFilter }) => {
   const visibility = [
     filters.VISIBILITY_FILTERS.ALL,
@@ -12,7 +11,7 @@ const Filters = ({ setFilter }) => {
   ]
   return visibility.map((item, index) => {
     return (
-      <div className="App" key={index}>
+      <div style={{ marginLeft: '10px' }} key={index}>
         <Button
           type="primary"
           onClick={e => {

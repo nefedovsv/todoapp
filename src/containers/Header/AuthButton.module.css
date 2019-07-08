@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+    padding-right: 20px;
+    height: 60px;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  .margin {
+    margin-right: 50px;
+  }

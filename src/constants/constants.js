@@ -8,7 +8,7 @@ export const SET_FILTER = 'SET_FILTER'
 export const LOGIN_ACTION = 'LOGIN_ACTION'
 export const LOGOUT_ACTION = 'LOGOUT_ACTION'
 export const VISIBILITY_FILTERS = {
-  ALL: 'all',
+  ALL: 'view all todos',
   COMPLETED: 'completed',
   INCOMPLETE: 'incomplete',
 }

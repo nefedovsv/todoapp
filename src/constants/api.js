@@ -1,14 +1,14 @@
 class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl
-    this.token = localStorage.getItem('token')
+    // this.token = localStorage.getItem('token')
   }
   async post(url, data) {
     const response = await fetch(this.baseUrl + url, {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         data: data,
@@ -20,14 +20,14 @@ class Api {
     await fetch(this.baseUrl + url + `${id}`, {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
   }
   async get(url) {
     const response = await fetch(this.baseUrl + url, {
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
     return response.json()
@@ -37,7 +37,7 @@ class Api {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         id: id,
