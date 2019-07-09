@@ -14,7 +14,7 @@ const AuthButton = withRouter(({ history, isAuthenticated, handleLogOut }) => {
         type="primary"
         onClick={() => {
           handleLogOut()
-          history.push('/login')
+          history.push('/')
           localStorage.clear()
         }}
       >

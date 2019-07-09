@@ -14,7 +14,7 @@ export function App() {
       <div>
         <AuthButton />
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <PrivateRoute path="/profile" component={TodoPage} />
           <Route component={NoMatchPage} />
         </Switch>
