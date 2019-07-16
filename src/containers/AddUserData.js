@@ -6,7 +6,7 @@ export const AddUserData = inject('authentication')(
     const [text, setText] = useState('')
     const handleSubmit = event => {
       event.preventDefault()
-      authentication.logeIn(text)
+      authentication.logIn(text)
       setText('')
     }
     return (

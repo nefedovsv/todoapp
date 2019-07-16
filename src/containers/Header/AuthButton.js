@@ -13,7 +13,7 @@ export const AuthButton = inject('authentication')(
           <Button
             type="primary"
             onClick={() => {
-              authentication.logeOut()
+              authentication.logOut()
               history.push('/')
               localStorage.clear()
             }}

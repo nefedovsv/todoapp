@@ -1,12 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { setFilter } from '../action/todo'
 import * as filters from '../constants/constants'
 import { Button } from 'antd'
 import { inject, observer } from 'mobx-react'
-
-const Filters = inject('mobxStore')(
-  observer(({ setFilter, mobxStore }) => {
+export const Filters = inject('todoModification')(
+  observer(({ todoModification }) => {
     const visibility = [
       filters.VISIBILITY_FILTERS.ALL,
       filters.VISIBILITY_FILTERS.COMPLETED,
@@ -19,9 +16,7 @@ const Filters = inject('mobxStore')(
             type="primary"
             onClick={e => {
               let currentFilter = e.currentTarget.innerText
-              setFilter(currentFilter)
-              // mobxStore.setFilter(currentFilter)
-              // console.log(mobxStore.actualfilter)
+              todoModification.setFilter(currentFilter)
             }}
           >
             {item}
@@ -31,8 +26,3 @@ const Filters = inject('mobxStore')(
     })
   })
 )
-
-export default connect(
-  null,
-  { setFilter }
-)(Filters)
