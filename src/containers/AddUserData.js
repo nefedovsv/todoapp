@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { handleLogIn } from '../action/authenticate'
+import { inject, observer } from 'mobx-react'
 import { InputUserData } from '../components/InputUserData'
-const AddUserData = ({ handleLogIn }) => {
-  const [text, setText] = useState('')
-  const handleSubmit = event => {
-    event.preventDefault()
-    handleLogIn(text)
-    setText('')
-  }
-  return (
-    <InputUserData text={text} setText={setText} handleSubmit={handleSubmit} />
-  )
-}
-export default connect(
-  null,
-  { handleLogIn }
-)(AddUserData)
+export const AddUserData = inject('authentication')(
+  observer(({ authentication }) => {
+    const [text, setText] = useState('')
+    const handleSubmit = event => {
+      event.preventDefault()
+      authentication.logeIn(text)
+      setText('')
+    }
+    return (
+      <InputUserData
+        text={text}
+        setText={setText}
+        handleSubmit={handleSubmit}
+      />
+    )
+  })
+)

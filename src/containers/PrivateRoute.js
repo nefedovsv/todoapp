@@ -1,27 +1,22 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      rest.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: { from: props.location },
-          }}
-        />
-      )
-    }
-  />
+import { inject, observer } from 'mobx-react'
+export const PrivateRoute = inject('authentication')(
+  observer(({ component: Component, authentication, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        authentication.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
+  ))
 )
-const mapStateToProps = store => {
-  return {
-    isAuthenticated: store.authentication.isAuthenticated,
-  }
-}
-export default connect(mapStateToProps)(PrivateRoute)
