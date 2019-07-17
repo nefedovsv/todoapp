@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Todo } from '../components/Todo'
-import { getArrayTodosByVisibilityFilter } from '../reducers/selectors'
+import { getArrayTodosByVisibilityFilter } from '../constants/selectors'
 export const TodoList = inject('todoModification')(
   observer(
     class TodoList extends Component {

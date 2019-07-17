@@ -1,4 +1,4 @@
-import * as filters from '../constants/constants'
+import * as filters from './constants'
 export const getArrayTodosByVisibilityFilter = (todos, visibilityFilter) => {
   switch (visibilityFilter) {
     case filters.VISIBILITY_FILTERS.COMPLETED:

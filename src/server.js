@@ -35,7 +35,6 @@ app.get('/api/users', jwtMW, function(req, res) {
 })
 
 app.post('/api/users', jwtMW, jsonParser, function(req, res) {
-  console.log(req.user)
   if (!req.body) return res.sendStatus(400)
   const { data } = req.body
   const user = new User({

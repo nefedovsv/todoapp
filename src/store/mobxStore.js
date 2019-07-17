@@ -6,7 +6,7 @@ const token = localStorage.getItem('token')
 token
   ? (initialStateAuthentication = true)
   : (initialStateAuthentication = false)
-export class Authentication {
+class Authentication {
   isAuthenticated = initialStateAuthentication
   async logIn(data) {
     try {
@@ -31,7 +31,7 @@ decorate(Authentication, {
   logOut: action,
 })
 
-export class TodoModification {
+class TodoModification {
   todo = []
   filter = filters.VISIBILITY_FILTERS.ALL
   setFilter(filter) {
@@ -87,3 +87,8 @@ decorate(TodoModification, {
   deliteTodo: action,
   toggleTodo: action,
 })
+
+export const store = {
+  todoModification: new TodoModification(),
+  authentication: new Authentication(),
+}

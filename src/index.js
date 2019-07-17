@@ -3,11 +3,10 @@ import { render } from 'react-dom'
 import { Provider } from 'mobx-react'
 import { App } from './App'
 import './Antd.css'
-import { Authentication, TodoModification } from './store/mobxStore'
-const todoModification = new TodoModification()
-const authentication = new Authentication()
+import { store } from './store/mobxStore'
+
 render(
-  <Provider authentication={authentication} todoModification={todoModification}>
+  <Provider {...store}>
     <App />
   </Provider>,
   document.getElementById('root')
