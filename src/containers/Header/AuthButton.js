@@ -18,7 +18,7 @@ export const AuthButton = inject('authentication')(
               localStorage.clear()
             }}
           >
-            Выйти
+            Выйти!
           </Button>
         </Text>
       ) : (
