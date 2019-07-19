@@ -12,3 +12,8 @@ export const VISIBILITY_FILTERS = {
   COMPLETED: 'completed',
   INCOMPLETE: 'incomplete',
 }
+export const visibility = [
+  VISIBILITY_FILTERS.ALL,
+  VISIBILITY_FILTERS.COMPLETED,
+  VISIBILITY_FILTERS.INCOMPLETE,
+]

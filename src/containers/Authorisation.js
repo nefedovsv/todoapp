@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import { inject, observer } from 'mobx-react'
-import { AddUserData } from '../containers/AddUserData'
+import { AddUserData } from './AddUserData.tsx'
 export const Login = inject('authentication')(
   observer(
     class Login extends Component {
