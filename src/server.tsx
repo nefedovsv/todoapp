@@ -1,19 +1,23 @@
-const mongoose = require('mongoose')
-const express = require('express')
+import mongoose from 'mongoose'
+import express from 'express'
+import jwt from 'jsonwebtoken'
+import exjwt from 'express-jwt'
+import cors from 'cors'
+
 const Schema = mongoose.Schema
 const app = express()
-var cors = require('cors')
 const jsonParser = express.json()
-const jwt = require('jsonwebtoken')
-const exjwt = require('express-jwt')
+
 app.use(cors())
 const jwtMW = exjwt({
   secret: 'my Todo App',
 })
+
 const userScheme = new Schema(
   { data: String, userId: String, completed: Boolean, userName: String },
   { versionKey: false }
 )
+
 const User = mongoose.model('User', userScheme)
 
 mongoose.connect(
@@ -27,23 +31,34 @@ mongoose.connect(
   }
 )
 
-app.get('/api/users', jwtMW, function(req, res) {
+app.get('/api/users', jwtMW, function(req: any, res) {
   User.find({ userName: req.user.userName }, function(err, users) {
     if (err) return console.log(err)
     res.send(users)
   })
 })
 
-app.post('/api/users', jwtMW, jsonParser, function(req, res) {
+interface IRequest<T> {
+  body: T;
+}
+interface IUserModel extends mongoose.Document {
+  data: string;
+  userName: string;
+}
+
+app.post('/api/users', jwtMW, jsonParser, function(
+  req: IRequest<IUserModel>,
+  res
+) {
   if (!req.body) return res.sendStatus(400)
-  const { data } = req.body
+
   const user = new User({
-    data: data,
+    data: req.body.data,
     completed: false,
-    userName: req.user.userName,
+    userName: req.body.userName,
   })
 
-  user.save(function(err) {
+  user.save(function(err: any) {
     if (err) return console.log(err)
     res.send(user)
   })
@@ -83,7 +98,7 @@ app.put('/api/users', jwtMW, jsonParser, function(req, res) {
   })
 })
 
-app.use(function(err, req, res, next) {
+app.use(function(err: any, res, next) {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('err')
   } else {
