@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 import { Typography, Button } from 'antd'
 import styles from './AuthButton.module.css'
+
 const { Text } = Typography
 export const AuthButton = inject('authentication')(
   observer(

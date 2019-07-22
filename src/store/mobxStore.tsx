@@ -3,7 +3,7 @@ import { api } from '../constants/api'
 import { observable, action, runInAction } from 'mobx'
 
 export interface IAuthentication {
-  isAuthenticated?: boolean;
+  isAuthenticated: boolean;
   logIn(data: string): Promise<void>
   logOut() : void
 }
@@ -76,7 +76,7 @@ class TodoModification implements ITodoModification{
   @action.bound
   async addTodo(text: string): Promise<void> {
     try {
-      const data: Todo[] = await api.post('users/', text) // РАЗОБРАТЬСЯ С ТИПАМИ
+      const data: Todo[] = await api.post('users/', text) 
       console.log(data)
       this.todo = this.todo.concat(data)
     } catch (error) {
