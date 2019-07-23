@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Redirect } from 'react-router'
 import { inject, observer } from 'mobx-react'
 import { AddUserData } from './AddUserData'
-
 interface IProps {
   authentication:any
   location?:any
 }
-
-export const Login = inject('authentication')(
-  observer(
-    class Login extends Component<IProps>  {
+@inject('authentication')
+@observer
+export class Login extends React.Component<IProps>  {
       render() {
-        const isAuthenticated = this.props.authentication.isAuthenticated
+        const {isAuthenticated} = this.props.authentication
         let { from } = this.props.location.state || {
           from: { pathname: '/profile' },
         }
@@ -20,5 +18,4 @@ export const Login = inject('authentication')(
         return <AddUserData />
       }
     }
-  )
-)
+  

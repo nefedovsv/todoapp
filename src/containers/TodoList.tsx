@@ -32,7 +32,7 @@ export class TodoList extends  React.Component<TodoListProps> {
         const { Text } = Typography
         const {filter} = this.props.todoModification!
         const {todo} = this.props.todoModification!
-        const arrayTodo:ITodo[] = getArrayTodosByVisibilityFilter(
+        const arrayTodo:ITodo[]|undefined = getArrayTodosByVisibilityFilter(
           todo,
           filter
         )

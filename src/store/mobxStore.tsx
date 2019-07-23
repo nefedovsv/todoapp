@@ -43,8 +43,8 @@ class Authentication implements IAuthentication {
 }
 
 export interface ITodoModification {
-  todo?: Todo[]
-  filter?: string
+  todo: Todo[]
+  filter: string
   setFilter(filter: string): void
   getAllTodo(): Promise<void>
   addTodo(text: string): Promise<void>
@@ -77,7 +77,6 @@ class TodoModification implements ITodoModification{
   async addTodo(text: string): Promise<void> {
     try {
       const data: Todo[] = await api.post('users/', text) 
-      console.log(data)
       this.todo = this.todo.concat(data)
     } catch (error) {
       this.todo = []

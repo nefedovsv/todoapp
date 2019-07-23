@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/mongodb": "^3.1.28",
     "classnames": "^2.2.6",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",

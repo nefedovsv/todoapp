@@ -1,5 +1,14 @@
 import * as filters from './constants'
-export const getArrayTodosByVisibilityFilter = (todo, filter) => {
+interface ITodo {
+  _id: string;
+  completed: boolean;
+  userName: string;
+  data: string;
+}
+export const getArrayTodosByVisibilityFilter = (
+  todo: ITodo[],
+  filter: string
+) => {
   switch (filter) {
     case filters.VISIBILITY_FILTERS.COMPLETED:
       return todo.filter(todo => todo.completed)

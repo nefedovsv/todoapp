@@ -1,9 +1,10 @@
 class Api {
-  constructor(baseUrl) {
+  baseUrl: string
+  constructor(baseUrl: string) {
     this.baseUrl = baseUrl
     // this.token = localStorage.getItem('token')
   }
-  async post(url, data) {
+  async post(url: string, data: string) {
     const response = await fetch(this.baseUrl + url, {
       method: 'post',
       headers: {
@@ -16,7 +17,7 @@ class Api {
     })
     return response.json()
   }
-  async delite(url, id) {
+  async delite(url: string, id: string) {
     await fetch(this.baseUrl + url + `${id}`, {
       method: 'DELETE',
       headers: {
@@ -24,7 +25,7 @@ class Api {
       },
     })
   }
-  async get(url) {
+  async get(url: string) {
     const response = await fetch(this.baseUrl + url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -32,7 +33,7 @@ class Api {
     })
     return response.json()
   }
-  async put(url, id, completed) {
+  async put(url: string, id: string, completed: boolean) {
     await fetch(this.baseUrl + url, {
       method: 'PUT',
       headers: {
