@@ -1,8 +1,6 @@
-// src/components/Profile.js
-import { Result, Button } from 'antd'
 import React from 'react'
+import { Result, Button } from 'antd'
 import { withRouter } from 'react-router-dom'
-
 export const NoMatchPage = withRouter(({ history }) => {
   return (
     <Result

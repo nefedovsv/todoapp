@@ -1,10 +1,5 @@
 import * as filters from './constants'
-interface ITodo {
-  _id: string;
-  completed: boolean;
-  userName: string;
-  data: string;
-}
+import { ITodo } from '../models/ITodoSchema'
 export const getArrayTodosByVisibilityFilter = (
   todo: ITodo[],
   filter: string

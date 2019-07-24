@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as filters from '../constants/constants'
 import { Button } from 'antd'
 import { inject, observer } from 'mobx-react'
-import { ITodoModification } from '../store/mobxStore'
+import { ITodoModification } from '../models/ITodoModificationSchema'
 interface FiltersProps {
   todoModification?: ITodoModification
 }

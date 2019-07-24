@@ -2,14 +2,8 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { List, Button, Typography } from 'antd'
 import { getArrayTodosByVisibilityFilter } from '../constants/selectors'
-import { ITodoModification } from '../store/mobxStore'
-
-interface ITodo {
-          _id: string;
-          completed: boolean;
-          userName: string;
-          data: string;
-        }
+import { ITodoModification } from '../models/ITodoModificationSchema'
+import {ITodo} from '../models/ITodoSchema'
 interface TodoListProps {
   todoModification?: ITodoModification
 }
@@ -32,7 +26,7 @@ export class TodoList extends  React.Component<TodoListProps> {
         const { Text } = Typography
         const {filter} = this.props.todoModification!
         const {todo} = this.props.todoModification!
-        const arrayTodo:ITodo[]|undefined = getArrayTodosByVisibilityFilter(
+        const arrayTodo:ITodo[] = getArrayTodosByVisibilityFilter(
           todo,
           filter
         )

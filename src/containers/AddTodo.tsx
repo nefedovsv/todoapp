@@ -2,7 +2,7 @@ import * as React from 'react'
 import { inject, observer } from 'mobx-react'
 import { observable } from "mobx";
 import { Input, Icon, Button, Form } from 'antd'
-import { ITodoModification } from '../store/mobxStore'
+import { ITodoModification } from '../models/ITodoModificationSchema'
 interface AddTodoProps {
   todoModification?: ITodoModification
 }

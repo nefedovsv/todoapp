@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { Redirect } from 'react-router'
+import { Redirect, RouteComponentProps } from 'react-router'
 import { inject, observer } from 'mobx-react'
 import { AddUserData } from './AddUserData'
+import { IAuthentication } from '../models/IAuthenticationSchema'
 interface IProps {
-  authentication:any
-  location?:any
+  authentication:IAuthentication
+  location:RouteComponentProps['location']
 }
 @inject('authentication')
 @observer

@@ -10,6 +10,7 @@ type PropsType =  RouteComponentProps & {
 @inject('authentication')
 @observer
 class AuthButton extends React.Component<PropsType>  {
+ 
       render() {
         const { Text } = Typography
         const {authentication} = this.props

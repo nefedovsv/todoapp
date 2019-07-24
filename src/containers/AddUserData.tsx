@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { observable } from "mobx";
 import { Input, Tooltip, Icon, Button, Form } from 'antd'
 import styles from '../components/Styles/InputUserData.module.css'
-import { IAuthentication } from '../store/mobxStore'
+import { IAuthentication } from '../models/IAuthenticationSchema'
 interface AddUserDataProps {
   authentication?: IAuthentication
 }
