@@ -6,7 +6,7 @@ export const NoMatchPage = withRouter(({ history }) => {
     <Result
       status="404"
       title="404"
-      subTitle="Ошибка в роутинге!"
+      subTitle="Ошибка в роутинге!!!"
       extra={
         <Button
           type="primary"
