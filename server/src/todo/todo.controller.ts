@@ -21,6 +21,7 @@ export class TodoController {
   create(@Body() createTodoDto: TodoDto): Promise<ITodo> {
     return this.todoService.create(createTodoDto);
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get('users')
   findAll(@Headers('userdata') userName: string): Promise<ITodo[]> {
     return this.todoService.findAll(userName);
