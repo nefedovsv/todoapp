@@ -52,4 +52,4 @@ class Api {
     });
   }
 }
-export const api = new Api("http://37.228.116.182:3001/api/");
+export const api = new Api("http://localhost:3001/api/");
