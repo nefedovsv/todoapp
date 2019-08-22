@@ -13,9 +13,17 @@ import { TodoDto } from './dto/todo.dto';
 import { TodoService } from './todo.service';
 import { ITodo } from './interfaces/todo.interface';
 import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from '../auth/auth.service';
 @Controller('api')
 export class TodoController {
-  constructor(private readonly todoService: TodoService) {}
+  constructor(
+    private readonly todoService: TodoService,
+    private readonly authService: AuthService,
+  ) {}
+  @Post('token')
+  async login(@Body('data') userName: string) {
+    return this.authService.login(userName);
+  }
   @UseGuards(AuthGuard('jwt'))
   @Post('users')
   create(@Body() createTodoDto: TodoDto): Promise<ITodo> {

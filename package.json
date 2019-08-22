@@ -1,4 +1,4 @@
-{ "homepage": "https://nefedovsv.github.io/todoapp/",                       
+{
   "name": "my-todo-app",
   "version": "0.1.0",
   "private": true,
@@ -16,9 +16,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
-    "typescript": "3.5.3",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build"
+    "typescript": "3.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,7 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "gh-pages": "^2.1.1"
-  }
+  "devDependencies": {}
 }

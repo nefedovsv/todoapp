@@ -7,7 +7,7 @@ import { PrivateRoute } from "./common/auth/PrivateRoute";
 import { Authentication } from "./common/auth/Authentication";
 import { TodoPage } from "./common/todo/TodoPage/TodoPage";
 import AuthButton from "./common/auth/AuthButton/AuthButton";
-const history = createBrowserHistory({ basename: "/todoapp/" });
+const history = createBrowserHistory();
 export function App() {
   return (
     <Router history={history}>
