@@ -1,51 +1,54 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { List, Button, Typography } from "antd";
-import { getArrayTodosByVisibilityFilter } from "../../constants/selectors";
-import { ITodoModification } from "../../models/ITodoModificationSchema";
-import { ITodo } from "../../models/ITodoSchema";
+import { getTodosByFilter } from "../selectors";
+import { ITodoModification } from "../../interfaces/ITodoModificationSchema";
+import { ITodo } from "../../interfaces/index";
+
 interface TodoListProps {
   todoModification?: ITodoModification;
 }
+
 @inject("todoModification")
 @observer
-export class TodoList extends React.Component<TodoListProps> {
+export class TodoList extends React.PureComponent<TodoListProps> {
   componentDidMount() {
     const { getAllTodo } = this.props.todoModification!;
     getAllTodo();
   }
-  handleClick = (todo: any) => () => {
-    //разобраться почему any
+
+  handleClick = (id: string) => {
     const { deliteTodo } = this.props.todoModification!;
-    deliteTodo(todo._id);
+    deliteTodo(id);
   };
-  handleClickText = (todo: any) => () => {
-    //разобраться почему any
+
+  handleClickText = (todo: ITodo) => {
     const { toggleTodo } = this.props.todoModification!;
     toggleTodo(todo._id, todo.completed);
   };
+
   render() {
     const { Text } = Typography;
-    const { filter } = this.props.todoModification!;
-    const { todo } = this.props.todoModification!;
-    const arrayTodo: ITodo[] = getArrayTodosByVisibilityFilter(todo, filter);
+    const { filter, todo } = this.props.todoModification!;
+    const arrayTodo: ITodo[] = getTodosByFilter(todo, filter);
+
     return (
       <List
         dataSource={arrayTodo}
-        renderItem={todo => (
+        renderItem={(todo: ITodo) => (
           <List.Item
             actions={[
-              <Button type="primary" onClick={this.handleClickText(todo)}>
-                Сделано
+              <Button type="primary" onClick={() => this.handleClickText(todo)}>
+                Done
               </Button>,
-              <Button type="primary" onClick={this.handleClick(todo)}>
-                Удалить
+              <Button type="primary" onClick={() => this.handleClick(todo._id)}>
+                Delete
               </Button>
             ]}
           >
             <List.Item.Meta
               title={
-                <span onClick={this.handleClickText(todo)}>
+                <span onClick={() => this.handleClickText(todo)}>
                   {todo && todo.completed ? (
                     <Text delete> {todo.data} </Text>
                   ) : (

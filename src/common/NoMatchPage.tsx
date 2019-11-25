@@ -1,12 +1,13 @@
 import React from "react";
 import { Result, Button } from "antd";
-import { withRouter } from "react-router-dom";
-export const NoMatchPage = withRouter(({ history }) => {
+import { history } from "../App";
+
+export const NoMatchPage = () => {
   return (
     <Result
       status="404"
       title="404"
-      subTitle="Ошибка в роутинге!!!"
+      subTitle="unknown route!!!"
       extra={
         <Button
           type="primary"
@@ -14,9 +15,9 @@ export const NoMatchPage = withRouter(({ history }) => {
             history.push("/");
           }}
         >
-          На главную
+          back to main
         </Button>
       }
     />
   );
-});
+};

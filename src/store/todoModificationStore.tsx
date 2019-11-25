@@ -1,16 +1,18 @@
-import * as filters from "../constants/constants";
-import { api } from "../constants/api";
 import { observable, action, runInAction } from "mobx";
-import { ITodo } from "../models/ITodoSchema";
-import { ITodoModification } from "../models/ITodoModificationSchema";
+import { api } from "../constants/api";
+import { FilterType } from "../interfaces/index";
+import { ITodo } from "../interfaces/index";
+import { ITodoModification } from "../interfaces/ITodoModificationSchema";
 
 export class TodoModification implements ITodoModification {
   @observable todo: ITodo[] = [];
-  @observable filter: string = filters.VISIBILITY_FILTERS.ALL;
+  @observable filter: string = FilterType.all;
+
   @action.bound
   setFilter(filter: string): void {
     this.filter = filter;
   }
+
   @action.bound
   async getAllTodo(): Promise<void> {
     try {
@@ -24,6 +26,7 @@ export class TodoModification implements ITodoModification {
       });
     }
   }
+
   @action.bound
   async addTodo(text: string): Promise<void> {
     try {
@@ -33,6 +36,7 @@ export class TodoModification implements ITodoModification {
       this.todo = [];
     }
   }
+
   @action.bound
   async deliteTodo(id: string): Promise<void> {
     try {

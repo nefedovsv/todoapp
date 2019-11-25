@@ -3,15 +3,18 @@ import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import { Input, Tooltip, Icon, Button, Form } from "antd";
 import styles from "./InputUserData.module.css";
-import { IAuthentication } from "../../../models/IAuthenticationSchema";
+import { IAuthentication } from "../../../interfaces/IAuthenticationSchema";
+
 interface AddUserDataProps {
   authentication?: IAuthentication;
 }
+
 @inject("authentication")
 @observer
 export class AddUserData extends React.Component<AddUserDataProps> {
   @observable
   value: string = "";
+
   render() {
     return (
       <div className={styles.root}>
@@ -41,9 +44,11 @@ export class AddUserData extends React.Component<AddUserDataProps> {
       </div>
     );
   }
+
   onChange = (e: React.FormEvent<HTMLInputElement>): void => {
     this.value = e.currentTarget.value;
   };
+
   onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const { logIn } = this.props.authentication!;

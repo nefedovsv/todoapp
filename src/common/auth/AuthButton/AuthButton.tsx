@@ -1,28 +1,20 @@
 import * as React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { Typography, Button } from "antd";
 import styles from "./AuthButton.module.css";
 
-type PropsType = RouteComponentProps & {
-  authentication?: any;
-};
-@inject("authentication")
-@observer
-class AuthButton extends React.Component<PropsType> {
-  render() {
+export const AuthButton = inject("authentication")(
+  observer(({ authentication }) => {
     const { Text } = Typography;
-    const { authentication } = this.props;
-    const { history } = this.props;
-    return authentication.isAuthenticated ? (
+    const { isAuthenticated, logOut } = authentication;
+
+    return isAuthenticated ? (
       <Text strong className={styles.root}>
         <span className={styles.margin}>Welcome!</span>
         <Button
           type="primary"
           onClick={() => {
-            authentication.logOut();
-            history.push("/");
-            localStorage.clear();
+            logOut();
           }}
         >
           LogOut
@@ -33,6 +25,5 @@ class AuthButton extends React.Component<PropsType> {
         You aren't authorised!
       </Text>
     );
-  }
-}
-export default withRouter(AuthButton);
+  })
+);

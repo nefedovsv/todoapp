@@ -3,6 +3,7 @@ import { AddTodo } from "../AddTodo";
 import { TodoList } from "../TodoList";
 import { Filters } from "../Filters";
 import styles from "./TodoPage.module.css";
+
 export const TodoPage = () => {
   return (
     <div className={styles.image}>

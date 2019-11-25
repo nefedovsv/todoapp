@@ -1,4 +1,4 @@
-import { ITodo } from "./ITodoSchema";
+import { ITodo } from "./index";
 
 export interface ITodoModification {
   todo: ITodo[];

@@ -1,4 +1,6 @@
-export const API = "http://localhost:3000/api/users/";
+//export const API = "http://localhost:3000/api/users/";
+import { FilterType } from "../interfaces";
+
 export const ADD_TODO = "ADD_TODO";
 export const FAIL_TODO = "FAIL_TODO";
 export const GET_ALL_TODO = "GET_ALL_TODO";
@@ -7,13 +9,9 @@ export const TOGGLE_TODO = "TOGGLE_TODO";
 export const SET_FILTER = "SET_FILTER";
 export const LOGIN_ACTION = "LOGIN_ACTION";
 export const LOGOUT_ACTION = "LOGOUT_ACTION";
-export const VISIBILITY_FILTERS = {
-  ALL: "view all todos",
-  COMPLETED: "completed",
-  INCOMPLETE: "incomplete"
-};
+
 export const visibility = [
-  VISIBILITY_FILTERS.ALL,
-  VISIBILITY_FILTERS.COMPLETED,
-  VISIBILITY_FILTERS.INCOMPLETE
+  FilterType.all,
+  FilterType.completed,
+  FilterType.incomplete
 ];

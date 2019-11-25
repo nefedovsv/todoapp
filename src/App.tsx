@@ -6,9 +6,11 @@ import { NoMatchPage } from "./common/NoMatchPage";
 import { PrivateRoute } from "./common/auth/PrivateRoute";
 import { Authentication } from "./common/auth/Authentication";
 import { TodoPage } from "./common/todo/TodoPage/TodoPage";
-import AuthButton from "./common/auth/AuthButton/AuthButton";
-const history = createBrowserHistory();
-export function App() {
+import { AuthButton } from "./common/auth/AuthButton/AuthButton";
+
+export const history = createBrowserHistory();
+
+export const App = () => {
   return (
     <Router history={history}>
       <div>
@@ -21,4 +23,4 @@ export function App() {
       </div>
     </Router>
   );
-}
+};

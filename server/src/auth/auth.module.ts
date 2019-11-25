@@ -10,7 +10,7 @@ import { jwtConstants } from './constants';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      // signOptions: { expiresIn: '60s' }, для проверки срока жизни ключа, не использую
     }),
   ],
   providers: [AuthService, JwtStrategy],

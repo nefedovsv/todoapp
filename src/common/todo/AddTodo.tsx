@@ -2,15 +2,18 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import { Input, Icon, Button, Form } from "antd";
-import { ITodoModification } from "../../models/ITodoModificationSchema";
+import { ITodoModification } from "../../interfaces/ITodoModificationSchema";
+
 interface AddTodoProps {
   todoModification?: ITodoModification;
 }
+
 @inject("todoModification")
 @observer
 export class AddTodo extends React.Component<AddTodoProps> {
   @observable
   value: string = "";
+
   render() {
     return (
       <Form layout="inline" onSubmit={this.onSubmit}>
@@ -32,9 +35,11 @@ export class AddTodo extends React.Component<AddTodoProps> {
       </Form>
     );
   }
+
   onChange = (e: React.FormEvent<HTMLInputElement>): void => {
     this.value = e.currentTarget.value;
   };
+
   onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const { addTodo } = this.props.todoModification!;
