@@ -1,4 +1,3 @@
-//export const API = "http://localhost:3000/api/users/";
 import { FilterType } from "../interfaces";
 
 export const ADD_TODO = "ADD_TODO";
