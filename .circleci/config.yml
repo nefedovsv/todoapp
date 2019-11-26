@@ -7,24 +7,74 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: client-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: server-cache-{{ checksum "package.json" }} 
       - run:
-          name: Install dependency
+          name: Install Client dependency
           command: npm install
+      - run:
+          name: Install Server dependency
+          command: |
+            cd server/ && npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: client-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - save_cache:
+          key: server-cache-{{ checksum "package.json" }}
+          paths:
+            - ./server/node_modules  
       - run:
-          name: Build
+          name: Build Client
           command: npm run build
+      - run:
+          name: Build Server
+          command: |
+            cd server/ && npm run build
       - persist_to_workspace:
           root: ~/todo
           paths:
             - build
+            - server
+  deploy:
+    working_directory: ~/todo
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - c7:75:84:df:08:ee:39:65:c0:e4:50:27:97:2b:00:7f
+      - attach_workspace:
+          at: ~/todo
       - run:
-          name: List
-          command: ls -al
+          name: Stop PM2
+          command: |
+            ssh $SSH_USER@$SSH_HOST "pm2 stop all"
       - run:
-          name: pwd
-          command: pwd
+          name: Deploy Over SSH App
+          command: |
+            scp -r ~/todo/build "$SSH_USER@$SSH_HOST:$SSH_DEPLOY_PATH"
+      - run:
+          name: Copy package.json Over SSH Server
+          command: |
+            scp -r ~/todo/server/package.json "$SSH_USER@$SSH_HOST:$SSH_DEPLOY_PATH_SERVER"
+      - run:
+          name: Deploy Over SSH Server
+          command: |
+            scp -r ~/todo/server/dist "$SSH_USER@$SSH_HOST:$SSH_DEPLOY_PATH_SERVER"
+      - run:
+          name: Start PM2
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd todo/server/dist && pm2 start main.js"
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
